@@ -1,5 +1,5 @@
 import { PagesComponent } from './pages.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from '../not-found/not-found.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { ProgressComponent } from './progress/progress.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -8,13 +8,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'dash',
+    path: 'dashboard',
     component: PagesComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', component: DashboardComponent },
       { path: 'progress', component: ProgressComponent },
       { path: 'grafica1', component: Grafica1Component },
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: '**', component: NotFoundComponent },
     ],
   },
