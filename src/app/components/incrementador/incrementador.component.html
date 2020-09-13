@@ -1,0 +1,19 @@
+<div class="input-group">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" type="button" (click)="decrementar()">
+      <i class="fa fa-minus"></i>
+    </button>
+  </span>
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Porcentaje"
+    value="{{ porcentaje }}"
+    (keyup)="inputValorChange($event)"
+  />
+  <span class="input-group-btn">
+    <button class="btn btn-success" type="button" (click)="incrementar()">
+      <i class="fa fa-plus"></i>
+    </button>
+  </span>
+</div>

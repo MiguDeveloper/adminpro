@@ -1,1 +1,51 @@
-<p>progress works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">Progress</div>
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-primary progress-bar-striped active"
+            style="height: 15px"
+            role="progressbar"
+            [ngStyle]="{ width: getPorcentaje }"
+            attr.aria-valuenow="{{ porcentaje }}"
+          >
+            {{ porcentaje }}%
+          </div>
+        </div>
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-primary progress-bar-striped active"
+            style="height: 15px"
+            role="progressbar"
+            [ngStyle]="{ width: getPorcentaje2 }"
+            attr.aria-valuenow="{{ porcentaje2 }}"
+          >
+            {{ porcentaje2 }}%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <app-incrementador
+          (valorPorcentaje)="porcentaje = $event"
+        ></app-incrementador>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="car">
+      <div class="card-body">
+        <app-incrementador
+          (valorPorcentaje)="porcentaje2 = $event"
+        ></app-incrementador>
+      </div>
+    </div>
+  </div>
+</div>
