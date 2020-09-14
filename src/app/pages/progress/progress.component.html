@@ -5,7 +5,7 @@
         <div class="card-title">Progress</div>
         <div class="progress m-t-20">
           <div
-            class="progress-bar bg-primary progress-bar-striped active"
+            class="progress-bar bg-success progress-bar-striped active"
             style="height: 15px"
             role="progressbar"
             [ngStyle]="{ width: getPorcentaje }"
@@ -34,15 +34,17 @@
     <div class="card">
       <div class="card-body">
         <app-incrementador
+          [btnClass]="'btn btn-success'"
           (valorPorcentaje)="porcentaje = $event"
         ></app-incrementador>
       </div>
     </div>
   </div>
   <div class="col-6">
-    <div class="car">
+    <div class="card">
       <div class="card-body">
         <app-incrementador
+          [btnClass]="'btn btn-primary'"
           (valorPorcentaje)="porcentaje2 = $event"
         ></app-incrementador>
       </div>

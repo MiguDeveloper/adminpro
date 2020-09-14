@@ -1,18 +1,19 @@
 <div class="input-group">
   <span class="input-group-btn">
-    <button class="btn btn-primary" type="button" (click)="decrementar()">
+    <button [ngClass]="btnClass" type="button" (click)="decrementar()">
       <i class="fa fa-minus"></i>
     </button>
   </span>
   <input
     type="text"
     class="form-control"
+    [ngClass]="{ 'is-invalid': porcentaje === 0 }"
     placeholder="Porcentaje"
     value="{{ porcentaje }}"
     (keyup)="inputValorChange($event)"
   />
   <span class="input-group-btn">
-    <button class="btn btn-success" type="button" (click)="incrementar()">
+    <button [ngClass]="btnClass" type="button" (click)="incrementar()">
       <i class="fa fa-plus"></i>
     </button>
   </span>

@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
