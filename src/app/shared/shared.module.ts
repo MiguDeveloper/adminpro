@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,7 +17,13 @@ import { FormsModule } from '@angular/forms';
     SidebarComponent,
     FooterComponent,
   ],
-  imports: [CommonModule, FormsModule, ComponentsModule, SharedRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    ComponentsModule,
+    SharedRoutingModule,
+  ],
   exports: [
     FormsModule,
     ComponentsModule,

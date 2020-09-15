@@ -19,14 +19,16 @@ export class SettingsService {
       './assets/css/colors/default-dark.css';
     const tema = localStorage.getItem('tema') || 'default-dark';
     this.setLinkTheme(urlTheme);
-    localStorage.setItem('urlTheme', urlTheme);
-    localStorage.setItem('tema', tema);
+    this.setLocalStorage(urlTheme, tema);
   }
 
   setTheme(tema: string) {
     const urlTheme = `./assets/css/colors/${tema}.css`;
-
     this.setLinkTheme(urlTheme);
+    this.setLocalStorage(urlTheme, tema);
+  }
+
+  setLocalStorage(urlTheme: string, tema: string) {
     localStorage.setItem('urlTheme', urlTheme);
     localStorage.setItem('tema', tema);
   }
