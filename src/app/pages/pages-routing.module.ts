@@ -1,3 +1,4 @@
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PagesComponent } from './pages.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       { path: '', component: DashboardComponent },
+      { path: 'account-setting', component: AccountSettingsComponent },
       { path: 'progress', component: ProgressComponent },
       { path: 'grafica1', component: Grafica1Component },
       { path: '**', component: NotFoundComponent },
