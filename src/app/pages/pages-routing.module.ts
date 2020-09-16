@@ -1,3 +1,5 @@
+import { RxjsComponent } from './rxjs/rxjs.component';
+import { PromesaComponent } from './promesa/promesa.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PagesComponent } from './pages.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
@@ -12,10 +14,32 @@ const routes: Routes = [
     path: 'dashboard',
     component: PagesComponent,
     children: [
-      { path: '', component: DashboardComponent },
-      { path: 'account-setting', component: AccountSettingsComponent },
-      { path: 'progress', component: ProgressComponent },
-      { path: 'grafica1', component: Grafica1Component },
+      {
+        path: '',
+        component: DashboardComponent,
+        data: { titulo: 'Dashboard' },
+      },
+      {
+        path: 'account-setting',
+        component: AccountSettingsComponent,
+        data: { titulo: 'Ajustes tema' },
+      },
+      {
+        path: 'progress',
+        component: ProgressComponent,
+        data: { titulo: 'Progress Bar' },
+      },
+      {
+        path: 'grafica1',
+        component: Grafica1Component,
+        data: { titulo: 'Graficos' },
+      },
+      {
+        path: 'promesa',
+        component: PromesaComponent,
+        data: { titulo: 'Promesas' },
+      },
+      { path: 'rxjs', component: RxjsComponent, data: { titulo: 'RxJs' } },
       { path: '**', component: NotFoundComponent },
     ],
   },
