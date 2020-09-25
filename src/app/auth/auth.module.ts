@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,7 +9,7 @@ import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
-  imports: [CommonModule, RouterModule, AuthRoutingModule],
+  imports: [CommonModule, RouterModule, AuthRoutingModule, SharedModule],
   exports: [LoginComponent, RegisterComponent],
 })
 export class AuthModule {}

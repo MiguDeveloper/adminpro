@@ -8,7 +8,8 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,16 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule,
     ComponentsModule,
     SharedRoutingModule,
   ],
   exports: [
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     ComponentsModule,
     BreadcrumbsComponent,
     HeaderComponent,
