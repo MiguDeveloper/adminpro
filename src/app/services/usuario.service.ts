@@ -1,3 +1,6 @@
+import { UsuarioUpdateResponse } from './../interfaces/usuario-update-response.interface';
+import { UsuarioUpdate } from './../interfaces/usuario-update.interface';
+import { Usuario } from './../models/usuario.model';
 import { Router } from '@angular/router';
 import { LoginCredenciales } from './../interfaces/login.interface';
 import { environment } from './../../environments/environment';
@@ -7,7 +10,7 @@ import { Observable, of } from 'rxjs';
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ResponseStandard } from '../interfaces/response-standard.interface';
-import { tap, map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 const base_url = environment.base_url;
 
 declare const gapi: any;
@@ -22,6 +25,7 @@ export class UsuarioService {
   urlLoginRenew = `${this.urlLogin}/renew`;
 
   auth2: any;
+  usuario: Usuario;
 
   private httpHeaders = new HttpHeaders({ 'Content-type': 'application/json' });
 
@@ -33,13 +37,33 @@ export class UsuarioService {
     this.googleInit();
   }
 
+  get getToken() {
+    return localStorage.getItem('token') || '';
+  }
+
+  get getUid() {
+    return this.usuario.uid || '';
+  }
+
   agregarHeaderXtoken(token: string) {
     return this.httpHeaders.append('x-token', token);
   }
+
   crearUsuario(usuarioRegistro: RegistroForm): Observable<ResponseRegister> {
     return this.httpClient.post<ResponseRegister>(
       this.urlUsuario,
       usuarioRegistro
+    );
+  }
+
+  actualizarUsuario(
+    usuarioUpdate: UsuarioUpdate
+  ): Observable<UsuarioUpdateResponse> {
+    usuarioUpdate = { ...usuarioUpdate, role: this.usuario.role };
+    return this.httpClient.put<UsuarioUpdateResponse>(
+      `${this.urlUsuario}/${this.getUid}`,
+      usuarioUpdate,
+      { headers: this.agregarHeaderXtoken(this.getToken) }
     );
   }
 
@@ -59,14 +83,18 @@ export class UsuarioService {
   }
 
   validarToken(): Observable<boolean> {
-    const token = localStorage.getItem('token') || '';
+    const token = this.getToken;
     return this.httpClient
       .get(this.urlLoginRenew, {
         headers: this.agregarHeaderXtoken(token),
       })
       .pipe(
-        tap((resp: any) => localStorage.setItem('token', resp.data.token)),
-        map((resp) => true),
+        map((resp: any) => {
+          const { nombre, email, img, role, google, _id } = resp.data.usuario;
+          this.usuario = new Usuario(nombre, email, '', img, google, role, _id);
+          localStorage.setItem('token', resp.data.token);
+          return true;
+        }),
         catchError((error) => of(false))
       );
   }

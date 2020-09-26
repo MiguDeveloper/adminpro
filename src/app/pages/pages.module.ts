@@ -11,6 +11,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesaComponent } from './promesa/promesa.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     AccountSettingsComponent,
     PromesaComponent,
     RxjsComponent,
+    PerfilComponent,
   ],
   imports: [CommonModule, SharedModule, PagesRoutingModule],
   exports: [

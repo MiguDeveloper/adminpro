@@ -1,3 +1,4 @@
+import { PerfilComponent } from './pages/perfil/perfil.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 import { NgModule } from '@angular/core';

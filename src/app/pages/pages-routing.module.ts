@@ -1,3 +1,4 @@
+import { PerfilComponent } from './perfil/perfil.component';
 import { AuthGuard } from './../guards/auth.guard';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PromesaComponent } from './promesa/promesa.component';
@@ -27,14 +28,19 @@ const routes: Routes = [
         data: { titulo: 'Ajustes tema' },
       },
       {
-        path: 'progress',
-        component: ProgressComponent,
-        data: { titulo: 'Progress Bar' },
-      },
-      {
         path: 'grafica1',
         component: Grafica1Component,
         data: { titulo: 'Graficos' },
+      },
+      {
+        path: 'profile',
+        component: PerfilComponent,
+        data: { titulo: 'Perfil' },
+      },
+      {
+        path: 'progress',
+        component: ProgressComponent,
+        data: { titulo: 'Progress Bar' },
       },
       {
         path: 'promesa',
