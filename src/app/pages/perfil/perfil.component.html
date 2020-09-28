@@ -33,6 +33,7 @@
                 id="exampleInputEmail1"
                 placeholder="Email"
                 formControlName="email"
+                [readOnly]="usuario.google"
               />
             </div>
             <small
@@ -66,7 +67,10 @@
       <div class="card-body">
         <div class="card-title">Avatar</div>
         <div class="card-subtitle">Imagen de usuario</div>
-        <img src="" alt="" />
+        <div class="text-center">
+          <img *ngIf="!imgTemp" [src]="usuario.getImg" class="img-avatar" />
+          <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
+        </div>
         <input type="file" (change)="seleccionarFoto($event)" />
         <br /><br />
         <button

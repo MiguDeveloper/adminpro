@@ -14,6 +14,7 @@ export class PerfilComponent implements OnInit {
   formPerfil: FormGroup;
   usuario: Usuario;
   fotoSeleccionada: File;
+  imgTemp: any;
 
   constructor(
     private fb: FormBuilder,
@@ -27,15 +28,26 @@ export class PerfilComponent implements OnInit {
 
   seleccionarFoto(event: any) {
     this.fotoSeleccionada = event.target.files[0];
+    if (!this.fotoSeleccionada) {
+      return (this.imgTemp = null);
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(this.fotoSeleccionada);
+    reader.onloadend = () => {
+      this.imgTemp = reader.result;
+    };
   }
 
   subirFoto() {
     if (this.fotoSeleccionada) {
       this.fileUploadService
         .actualizarFoto(this.fotoSeleccionada, 'usuarios', this.usuario.uid)
-        .then((img) => {
-          this.usuario.img = img;
-          console.log(img);
+        .then((data) => {
+          this.usuario.img = data.data.archivo;
+          Swal.fire('Correcto', data.message, 'success');
+        })
+        .catch((error) => {
+          Swal.fire('Error', error.error.message, 'error');
         });
     } else {
       Swal.fire('Error', 'Debe seleccionar una imagen', 'error');
@@ -65,9 +77,8 @@ export class PerfilComponent implements OnInit {
 
   actualizarPerfil() {
     if (this.formPerfil.valid) {
-      this.usuarioService
-        .actualizarUsuario(this.formPerfil.value)
-        .subscribe((rpta) => {
+      this.usuarioService.actualizarUsuario(this.formPerfil.value).subscribe(
+        (rpta) => {
           if (rpta.isSuccess) {
             if (!rpta.isWarning) {
               const { nombre, email } = rpta.data;
@@ -76,7 +87,11 @@ export class PerfilComponent implements OnInit {
               Swal.fire('Correcto', rpta.message, 'success');
             }
           }
-        });
+        },
+        (error) => {
+          Swal.fire('Error', error.error.message, 'error');
+        }
+      );
     } else {
       this.formPerfil.markAllAsTouched();
     }
