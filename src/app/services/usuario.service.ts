@@ -1,3 +1,5 @@
+import { UsuarioDelete } from './../interfaces/usuario-delete';
+import { UsuariosResponse } from './../interfaces/usuarios-response';
 import { UsuarioUpdateResponse } from './../interfaces/usuario-update-response.interface';
 import { UsuarioUpdate } from './../interfaces/usuario-update.interface';
 import { Usuario } from './../models/usuario.model';
@@ -45,8 +47,8 @@ export class UsuarioService {
     return this.usuario.uid || '';
   }
 
-  agregarHeaderXtoken(token: string) {
-    return this.httpHeaders.append('x-token', token);
+  agregarHeaderXtoken() {
+    return this.httpHeaders.append('x-token', this.getToken);
   }
 
   crearUsuario(usuarioRegistro: RegistroForm): Observable<ResponseRegister> {
@@ -63,7 +65,7 @@ export class UsuarioService {
     return this.httpClient.put<UsuarioUpdateResponse>(
       `${this.urlUsuario}/${this.getUid}`,
       usuarioUpdate,
-      { headers: this.agregarHeaderXtoken(this.getToken) }
+      { headers: this.agregarHeaderXtoken() }
     );
   }
 
@@ -83,10 +85,9 @@ export class UsuarioService {
   }
 
   validarToken(): Observable<boolean> {
-    const token = this.getToken;
     return this.httpClient
       .get(this.urlLoginRenew, {
-        headers: this.agregarHeaderXtoken(token),
+        headers: this.agregarHeaderXtoken(),
       })
       .pipe(
         map((resp: any) => {
@@ -120,5 +121,44 @@ export class UsuarioService {
         resolve();
       });
     });
+  }
+
+  cargarUsuarios(desde = 0): Observable<UsuariosResponse> {
+    return this.httpClient
+      .get<UsuariosResponse>(`${this.urlUsuario}?desde=${desde}`, {
+        headers: this.agregarHeaderXtoken(),
+      })
+      .pipe(
+        map((resp) => {
+          const usuarios = resp.data.map(
+            (usuario) =>
+              new Usuario(
+                usuario.nombre,
+                usuario.email,
+                '',
+                usuario.img,
+                usuario.google,
+                usuario.role,
+                usuario._id
+              )
+          );
+
+          return {
+            isSuccess: resp.isSuccess,
+            isWarning: resp.isWarning,
+            message: resp.message,
+            uid: resp.uid,
+            total: resp.total,
+            data: usuarios,
+          };
+        })
+      );
+  }
+
+  eliminarUsuario(usuario: Usuario): Observable<UsuarioDelete> {
+    return this.httpClient.delete<UsuarioDelete>(
+      `${this.urlUsuario}/${usuario.uid}`,
+      { headers: this.agregarHeaderXtoken() }
+    );
   }
 }
