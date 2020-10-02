@@ -1,3 +1,4 @@
+import { TablaColeccion } from './../../utils/enumeradores';
 import { FileUploadService } from './../../services/file-upload.service';
 import Swal from 'sweetalert2';
 import { Usuario } from './../../models/usuario.model';
@@ -41,7 +42,11 @@ export class PerfilComponent implements OnInit {
   subirFoto() {
     if (this.fotoSeleccionada) {
       this.fileUploadService
-        .actualizarFoto(this.fotoSeleccionada, 'usuarios', this.usuario.uid)
+        .actualizarFoto(
+          this.fotoSeleccionada,
+          TablaColeccion.Usuarios,
+          this.usuario.uid
+        )
         .then((data) => {
           this.usuario.img = data.data.archivo;
           Swal.fire('Correcto', data.message, 'success');

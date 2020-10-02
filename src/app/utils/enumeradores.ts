@@ -3,3 +3,8 @@ export enum TablaColeccion {
   Medicos = 'medicos',
   Hospitales = 'hospitales',
 }
+
+export enum PerfilesUsuarios {
+  ADMIN_ROLE = 'ADMIN_ROLE',
+  USER_ROLE = 'USER_ROLE',
+}

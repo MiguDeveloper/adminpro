@@ -69,6 +69,14 @@ export class UsuarioService {
     );
   }
 
+  guardarUsuario(usuarioUpdate: Usuario): Observable<UsuarioUpdateResponse> {
+    return this.httpClient.put<UsuarioUpdateResponse>(
+      `${this.urlUsuario}/${usuarioUpdate.uid}`,
+      usuarioUpdate,
+      { headers: this.agregarHeaderXtoken() }
+    );
+  }
+
   loginUser(
     loginCredenciales: LoginCredenciales
   ): Observable<ResponseStandard> {

@@ -1,8 +1,11 @@
+import { Subscription } from 'rxjs';
+import { ModalImagenService } from './../../../services/modal-imagen.service';
+import { PerfilesUsuarios } from './../../../utils/enumeradores';
 import Swal from 'sweetalert2';
 import { BusquedasService } from './../../../services/busquedas.service';
 import { Usuario } from './../../../models/usuario.model';
 import { UsuarioService } from './../../../services/usuario.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TablaColeccion } from 'src/app/utils/enumeradores';
 
 @Component({
@@ -10,19 +13,33 @@ import { TablaColeccion } from 'src/app/utils/enumeradores';
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css'],
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit, OnDestroy {
   usuarios: Usuario[] = [];
   totalUsuarios = 0;
   desde = 0;
   cargando = true;
+  rolesSistema = [PerfilesUsuarios.ADMIN_ROLE, PerfilesUsuarios.USER_ROLE];
+  imgSubs: Subscription;
 
   constructor(
     private usuarioService: UsuarioService,
-    private busquedaService: BusquedasService
+    private busquedaService: BusquedasService,
+    private modalImagenService: ModalImagenService
   ) {}
+
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.cargarUsuarios();
+    this.imgSubs = this.modalImagenService.notificarSubioImagen.subscribe(
+      (rpta) => {
+        this.usuarios.find((usuario) =>
+          usuario.uid === rpta.uid ? (usuario.img = rpta.archivo) : ''
+        );
+      }
+    );
   }
 
   cargarUsuarios() {
@@ -81,5 +98,26 @@ export class UsuariosComponent implements OnInit {
         });
       }
     });
+  }
+
+  cambiarRole(usuario: Usuario) {
+    this.usuarioService.guardarUsuario(usuario).subscribe(
+      (rpta) => {
+        if (rpta.isSuccess) {
+          console.log(rpta);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  abrirModal(usuario: Usuario) {
+    this.modalImagenService.abrirModal(
+      TablaColeccion.Usuarios,
+      usuario.uid,
+      usuario.img
+    );
   }
 }

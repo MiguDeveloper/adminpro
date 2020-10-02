@@ -1,3 +1,4 @@
+import { TablaColeccion } from './../utils/enumeradores';
 import { UsuarioService } from './usuario.service';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -9,11 +10,7 @@ const base_url = environment.base_url;
 })
 export class FileUploadService {
   constructor(private usuarioService: UsuarioService) {}
-  async actualizarFoto(
-    archivo: File,
-    tipo: 'usuarios' | 'medicos' | 'hospitales',
-    id: string
-  ) {
+  async actualizarFoto(archivo: File, tipo: TablaColeccion, id: string) {
     try {
       const url = `${base_url}/upload/${tipo}/${id}`;
       const formData = new FormData();
