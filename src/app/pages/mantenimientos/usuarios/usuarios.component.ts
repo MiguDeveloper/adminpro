@@ -20,6 +20,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   cargando = true;
   rolesSistema = [PerfilesUsuarios.ADMIN_ROLE, PerfilesUsuarios.USER_ROLE];
   imgSubs: Subscription;
+  tablaColeccion: TablaColeccion = TablaColeccion.Usuarios;
 
   constructor(
     private usuarioService: UsuarioService,

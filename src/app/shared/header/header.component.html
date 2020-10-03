@@ -317,14 +317,20 @@
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
-            ><img [src]="usuario.getImg" alt="user" class="profile-pic"
+            ><img
+              [src]="usuario.img | imagen: tablaColeccion"
+              alt="user"
+              class="profile-pic"
           /></a>
           <div class="dropdown-menu dropdown-menu-right animated flipInY">
             <ul class="dropdown-user">
               <li>
                 <div class="dw-user-box">
                   <div class="u-img">
-                    <img [src]="usuario.getImg" alt="user" />
+                    <img
+                      [src]="usuario.img | imagen: tablaColeccion"
+                      alt="user"
+                    />
                   </div>
                   <div class="u-text">
                     <h4>{{ usuario.nombre }}</h4>

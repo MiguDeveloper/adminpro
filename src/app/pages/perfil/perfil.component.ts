@@ -16,6 +16,7 @@ export class PerfilComponent implements OnInit {
   usuario: Usuario;
   fotoSeleccionada: File;
   imgTemp: any;
+  tablaColeccion: TablaColeccion = TablaColeccion.Usuarios;
 
   constructor(
     private fb: FormBuilder,

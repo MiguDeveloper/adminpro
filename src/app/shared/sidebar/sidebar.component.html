@@ -12,9 +12,10 @@
             class="has-arrow waves-effect waves-dark"
             href="#"
             aria-expanded="false"
-            ><img [src]="usuario.getImg" alt="user" /><span class="hide-menu"
-              >{{ usuario.nombre }}
-            </span></a
+            ><img
+              [src]="usuario.img | imagen: tablaColeccion"
+              alt="user"
+            /><span class="hide-menu">{{ usuario.nombre }} </span></a
           >
           <ul aria-expanded="false" class="collapse">
             <li>

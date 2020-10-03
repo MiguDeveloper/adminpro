@@ -1,3 +1,4 @@
+import { PipesModule } from './../pipes/pipes.module';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './../components/components.module';
 import { NgModule } from '@angular/core';
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    PipesModule,
     RouterModule,
     ComponentsModule,
     SharedRoutingModule,
@@ -31,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    PipesModule,
     ComponentsModule,
     BreadcrumbsComponent,
     HeaderComponent,

@@ -44,17 +44,17 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosComponent,
-        data: { titulo: 'Usuario' },
+        data: { titulo: 'Mantenimientos Usuario' },
       },
       {
         path: 'medicos',
         component: MedicosComponent,
-        data: { titulo: 'Medico' },
+        data: { titulo: 'Mantenimientos Medico' },
       },
       {
         path: 'hospitales',
         component: HospitalesComponent,
-        data: { titulo: 'Hospital' },
+        data: { titulo: 'Mantenimientos Hospital' },
       }, // Fin mantenimiento
       {
         path: 'progress',

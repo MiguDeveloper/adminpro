@@ -46,7 +46,7 @@
               <tr *ngFor="let usuario of usuarios">
                 <td class="text-center">
                   <img
-                    [src]="usuario.getImg"
+                    [src]="usuario.img | imagen: tablaColeccion"
                     width="30"
                     height="30"
                     title="{{ usuario.nombre }}"

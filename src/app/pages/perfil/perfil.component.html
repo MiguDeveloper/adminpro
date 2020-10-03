@@ -68,7 +68,11 @@
         <div class="card-title">Avatar</div>
         <div class="card-subtitle">Imagen de usuario</div>
         <div class="text-center">
-          <img *ngIf="!imgTemp" [src]="usuario.getImg" class="img-avatar" />
+          <img
+            *ngIf="!imgTemp"
+            [src]="usuario.img | imagen: tablaColeccion"
+            class="img-avatar"
+          />
           <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" />
         </div>
         <input type="file" (change)="seleccionarFoto($event)" />

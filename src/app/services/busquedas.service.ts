@@ -51,6 +51,7 @@ export class BusquedasService {
                 usuario.uid
               )
           );
+          console.log(usuarios);
           return {
             isSuccess: resp.isSuccess,
             isWarning: resp.isWarning,

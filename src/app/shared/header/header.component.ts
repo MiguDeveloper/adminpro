@@ -1,3 +1,4 @@
+import { TablaColeccion } from 'src/app/utils/enumeradores';
 import { Usuario } from './../../models/usuario.model';
 import { UsuarioService } from './../../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   usuario: Usuario;
+  tablaColeccion: TablaColeccion = TablaColeccion.Usuarios;
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
