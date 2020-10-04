@@ -48,7 +48,7 @@ export class BusquedasService {
                 usuario.img,
                 usuario.google,
                 usuario.role,
-                usuario.uid
+                usuario._id
               )
           );
           console.log(usuarios);

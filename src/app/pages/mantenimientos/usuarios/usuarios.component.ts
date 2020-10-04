@@ -36,6 +36,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.cargarUsuarios();
     this.imgSubs = this.modalImagenService.notificarSubioImagen.subscribe(
       (rpta) => {
+        console.log(rpta);
         this.usuarios.find((usuario) =>
           usuario.uid === rpta.uid ? (usuario.img = rpta.archivo) : ''
         );
