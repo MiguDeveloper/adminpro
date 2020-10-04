@@ -1,3 +1,4 @@
+import { BusquedasService } from './../../../services/busquedas.service';
 import { Subscription } from 'rxjs';
 import { TablaColeccion } from 'src/app/utils/enumeradores';
 import { ModalImagenService } from './../../../services/modal-imagen.service';
@@ -19,7 +20,8 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   constructor(
     private hospitalService: HospitalService,
-    private modalImagenService: ModalImagenService
+    private modalImagenService: ModalImagenService,
+    private busquedaService: BusquedasService
   ) {}
 
   ngOnInit(): void {
@@ -119,5 +121,9 @@ export class HospitalesComponent implements OnInit, OnDestroy {
         });
       console.log(result.value);
     }
+  }
+
+  buscarHospital(termino: string) {
+    this.busquedaService.buscar(TablaColeccion.Hospitales, termino).subscribe();
   }
 }
