@@ -15,6 +15,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
     UsuariosComponent,
     HospitalesComponent,
     MedicosComponent,
+    MedicoComponent,
   ],
   imports: [CommonModule, SharedModule, PagesRoutingModule],
   exports: [

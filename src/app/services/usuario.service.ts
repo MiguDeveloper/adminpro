@@ -44,7 +44,7 @@ export class UsuarioService {
   }
 
   get getUid() {
-    return this.usuario.uid || '';
+    return this.usuario._id || '';
   }
 
   agregarHeaderXtoken() {
@@ -71,7 +71,7 @@ export class UsuarioService {
 
   guardarUsuario(usuarioUpdate: Usuario): Observable<UsuarioUpdateResponse> {
     return this.httpClient.put<UsuarioUpdateResponse>(
-      `${this.urlUsuario}/${usuarioUpdate.uid}`,
+      `${this.urlUsuario}/${usuarioUpdate._id}`,
       usuarioUpdate,
       { headers: this.agregarHeaderXtoken() }
     );
@@ -132,40 +132,17 @@ export class UsuarioService {
   }
 
   cargarUsuarios(desde = 0): Observable<UsuariosResponse> {
-    return this.httpClient
-      .get<UsuariosResponse>(`${this.urlUsuario}?desde=${desde}`, {
+    return this.httpClient.get<UsuariosResponse>(
+      `${this.urlUsuario}?desde=${desde}`,
+      {
         headers: this.agregarHeaderXtoken(),
-      })
-      .pipe(
-        map((resp) => {
-          const usuarios = resp.data.map(
-            (usuario) =>
-              new Usuario(
-                usuario.nombre,
-                usuario.email,
-                '',
-                usuario.img,
-                usuario.google,
-                usuario.role,
-                usuario._id
-              )
-          );
-
-          return {
-            isSuccess: resp.isSuccess,
-            isWarning: resp.isWarning,
-            message: resp.message,
-            uid: resp.uid,
-            total: resp.total,
-            data: usuarios,
-          };
-        })
-      );
+      }
+    );
   }
 
   eliminarUsuario(usuario: Usuario): Observable<UsuarioDelete> {
     return this.httpClient.delete<UsuarioDelete>(
-      `${this.urlUsuario}/${usuario.uid}`,
+      `${this.urlUsuario}/${usuario._id}`,
       { headers: this.agregarHeaderXtoken() }
     );
   }

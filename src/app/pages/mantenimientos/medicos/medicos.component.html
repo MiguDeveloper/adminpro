@@ -1,1 +1,93 @@
-<p>medicos works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          type="text"
+          class="form-control mb-2"
+          placeholder="Buscar usuario..."
+          #txtBusqueda
+          (keyup)="buscar(txtBusqueda.value)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn fast" *ngIf="cargando">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Buscando</h4>
+      <i class="fa fa-spinner fa-spin fa-2x"></i>
+      <p class="mb-0">espere...</p>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">
+            <button class="btn btn-primary" [routerLink]="['/dashboard/medico/nuevo']">
+              <i class="fa fa-hospital-o"></i> Crear médico
+            </button>
+          </div>
+        <h4 class="card-title">Médicos ({{ medicos.length }})</h4>
+        <h6 class="card-subtitle">Médicos registrados.</h6>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="w100">Avatar</th>
+                <th>Nombre</th>
+                <th>Hospitales</th>
+                <th class="text-nowrap w100">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let medico of medicos">
+                <td>
+                  <img
+                    width="30"
+                    height="30"
+                    class="cursor"
+                    [src]="medico.img | imagen: tablaColeccion"
+                    [alt]="medico.nombre"
+                    [title]="medico.nombre"
+                    (click)="abrirModal(medico)"
+                  />
+                </td>
+                <td>{{ medico.nombre }}</td>
+                <td>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let hospital of medico.hospital">{{hospital.nombre}}</li>
+                    </ul>                  
+                </td>
+                <td class="text-nowrap">
+                  <a
+                    data-toggle="tooltip"
+                    data-original-title="Editar"      
+                    [routerLink]="['/dashboard/medico', medico._id]"              
+                  >
+                    <i class="fa fa-pencil text-inverse m-r-10"></i>
+                  </a>
+                  <a                    
+                    data-toggle="tooltip"
+                    data-original-title="Eliminar"
+                    class="cursor"
+                    (click)="eliminarMedico(medico)"
+                  >
+                    <i class="fa fa-close text-danger"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary">Anterior</button>
+        <button class="btn btn-secondary">Seguiente</button>
+      </div>
+    </div>
+  </div>
+</div>

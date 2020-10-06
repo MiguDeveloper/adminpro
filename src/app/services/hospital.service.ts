@@ -28,7 +28,7 @@ export class HospitalService {
     return this.httpHeaders.append('x-token', this.getToken);
   }
 
-  cargarUsuarios(): Observable<HospitalesResp> {
+  cargarHospitales(): Observable<HospitalesResp> {
     return this.httpClient.get<HospitalesResp>(this.urlHospitales, {
       headers: this.agregarHeaderToken(),
     });

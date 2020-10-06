@@ -10,6 +10,7 @@ export class Usuario {
     public img?: string,
     public google?: boolean,
     public role?: string,
-    public uid?: string
+    // tslint:disable-next-line: variable-name
+    public _id?: string
   ) {}
 }

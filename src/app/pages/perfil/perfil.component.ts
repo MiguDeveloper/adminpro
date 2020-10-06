@@ -46,7 +46,7 @@ export class PerfilComponent implements OnInit {
         .actualizarFoto(
           this.fotoSeleccionada,
           TablaColeccion.Usuarios,
-          this.usuario.uid
+          this.usuario._id
         )
         .then((data) => {
           this.usuario.img = data.data.archivo;

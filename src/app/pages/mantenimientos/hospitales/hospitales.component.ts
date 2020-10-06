@@ -41,7 +41,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   cargarHospitales() {
     this.cargando = true;
-    this.hospitalService.cargarUsuarios().subscribe((resp) => {
+    this.hospitalService.cargarHospitales().subscribe((resp) => {
       if (resp.isSuccess) {
         this.cargando = false;
         this.hospitales = resp.data;
@@ -124,6 +124,14 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   }
 
   buscarHospital(termino: string) {
-    this.busquedaService.buscar(TablaColeccion.Hospitales, termino).subscribe();
+    if (termino?.trim()) {
+      this.busquedaService
+        .buscar(TablaColeccion.Hospitales, termino)
+        .subscribe((rpta) => {
+          if (rpta.isSuccess) {
+            this.hospitales = rpta.data;
+          }
+        });
+    }
   }
 }

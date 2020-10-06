@@ -38,7 +38,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       (rpta) => {
         console.log(rpta);
         this.usuarios.find((usuario) =>
-          usuario.uid === rpta.uid ? (usuario.img = rpta.archivo) : ''
+          usuario._id === rpta.uid ? (usuario.img = rpta.archivo) : ''
         );
       }
     );
@@ -78,7 +78,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   }
 
   eliminarUsuario(usuario: Usuario) {
-    if (usuario.uid === this.usuarioService.getUid) {
+    if (usuario._id === this.usuarioService.getUid) {
       return Swal.fire('Error', 'No puede borrarse a si mismo', 'error');
     }
     Swal.fire({
@@ -118,7 +118,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   abrirModal(usuario: Usuario) {
     this.modalImagenService.abrirModal(
       TablaColeccion.Usuarios,
-      usuario.uid,
+      usuario._id,
       usuario.img
     );
   }

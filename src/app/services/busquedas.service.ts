@@ -1,7 +1,5 @@
-import { Usuario } from './../models/usuario.model';
-import { map } from 'rxjs/operators';
 import { TablaColeccion } from './../utils/enumeradores';
-import { UsuariosBusqueda } from './../interfaces/usuarios-busqueda';
+import { BusquedaResponse } from '../interfaces/busqueda-response.interface';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -29,36 +27,12 @@ export class BusquedasService {
   buscar(
     tabla: TablaColeccion,
     busqueda: string
-  ): Observable<UsuariosBusqueda> {
-    return this.httpClient
-      .get<UsuariosBusqueda>(
-        `${this.urlBusquedaTodo}/coleccion/${tabla}/${busqueda}`,
-        {
-          headers: this.agregarHeaderXtoken(),
-        }
-      )
-      .pipe(
-        map((resp) => {
-          const usuarios = resp.data.map(
-            (usuario) =>
-              new Usuario(
-                usuario.nombre,
-                usuario.email,
-                '',
-                usuario.img,
-                usuario.google,
-                usuario.role,
-                usuario._id
-              )
-          );
-          console.log(usuarios);
-          return {
-            isSuccess: resp.isSuccess,
-            isWarning: resp.isWarning,
-            message: resp.message,
-            data: usuarios,
-          };
-        })
-      );
+  ): Observable<BusquedaResponse> {
+    return this.httpClient.get<BusquedaResponse>(
+      `${this.urlBusquedaTodo}/coleccion/${tabla}/${busqueda}`,
+      {
+        headers: this.agregarHeaderXtoken(),
+      }
+    );
   }
 }
