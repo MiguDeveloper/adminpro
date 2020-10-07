@@ -1,7 +1,9 @@
 import { Medico } from './../models/medico';
 import {
+  MedicoCreateReq,
   MedicoCreateResp,
   MedicoDeleteResp,
+  MedicosByIdResp,
 } from './../interfaces/medicos-resp';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -34,7 +36,7 @@ export class MedicoService {
     });
   }
 
-  crearMedico(medico: Medico): Observable<MedicoCreateResp> {
+  crearMedico(medico: MedicoCreateReq): Observable<MedicoCreateResp> {
     return this.httpClient.post<MedicoCreateResp>(this.urlMedicos, medico, {
       headers: this.agregarHeaderXToken(),
     });
@@ -57,5 +59,11 @@ export class MedicoService {
         headers: this.agregarHeaderXToken(),
       }
     );
+  }
+
+  getMedicoById(id: string): Observable<MedicosByIdResp> {
+    return this.httpClient.get<MedicosByIdResp>(`${this.urlMedicos}/${id}`, {
+      headers: this.agregarHeaderXToken(),
+    });
   }
 }

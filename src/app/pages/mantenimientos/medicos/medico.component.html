@@ -3,15 +3,15 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Medico</h4>
-        <h6 class="card-subtitle">Actualizar información</h6>
+        <h6 class="card-subtitle">Ingresar información</h6>
         <form class="form p-t-20" [formGroup]="formMedico">
-          <div class="form-group">
+          <div class="form-group" *ngIf="medico">
             <label for="exampleInputuname">Foto médico</label>
             <div class="input-group">
               <img
                 width="200"
                 height="200"
-                src="http://localhost:3005/api/upload/usuarios/856028b3-33e1-42a5-afd0-e13a5f420b0e.png"
+                [src]="medico.img | imagen: tablaColeccionMedicos"
                 alt=""
               />
             </div>
@@ -37,7 +37,12 @@
             <label for="exampleInputEmail1">Hospital</label>
             <div class="input-group">
               <select multiple class="form-control" formControlName="hospital">
-                <option *ngFor="let hospital of hospitales" [value]="hospital._id">{{hospital.nombre}}</option>                
+                <option
+                  *ngFor="let hospital of hospitales"
+                  [value]="hospital._id"
+                >
+                  {{ hospital.nombre }}
+                </option>
               </select>
             </div>
             <small
@@ -61,14 +66,35 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <div class="card-title">Hospital</div>
-        <div class="card-subtitle">Hospital asignado</div>
-        <img
-          width="200"
-          height="200"
-          src="http://localhost:3005/api/upload/usuarios/856028b3-33e1-42a5-afd0-e13a5f420b0e.png"
-          alt=""
-        />
+        <div class="card-title">Hospitales</div>
+        <div class="card-subtitle">
+          Hospital asignados al médico ({{ hospitalesSeleccionados.length }})
+        </div>
+        <table class="table table-borderless">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Hospital</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="animated fadeIn"
+              *ngFor="let item of hospitalesSeleccionados"
+            >
+              <th scope="row">
+                <img
+                  width="30"
+                  height="30"
+                  [src]="item.img | imagen: tablaColeccionHospital"
+                  [alt]="item.nombre"
+                  [title]="item.nombre"
+                />
+              </th>
+              <td>{{ item.nombre }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

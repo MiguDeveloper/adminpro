@@ -1,3 +1,4 @@
+import { Medico } from './../models/medico';
 import { Usuario } from './../models/usuario.model';
 import { Hospital } from './../models/hospital.model';
 export interface MedicosResp {
@@ -26,4 +27,16 @@ export interface MedicoDeleteResp {
   isSuccess: boolean;
   isWarning: boolean;
   message: string;
+}
+
+export interface MedicoCreateReq {
+  nombre: string;
+  hospital: string[];
+}
+
+export interface MedicosByIdResp {
+  isSuccess: boolean;
+  isWarning: boolean;
+  message: string;
+  data: Medico;
 }
