@@ -1,3 +1,5 @@
+import { RoleGuard } from './../guards/role.guard';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
@@ -41,10 +43,16 @@ const routes: Routes = [
         component: PerfilComponent,
         data: { titulo: 'Perfil' },
       },
+      {
+        path: 'buscar/:termino',
+        component: BusquedaComponent,
+        data: { titulo: 'busquedas' },
+      },
       // Mantenimientos
       {
         path: 'usuarios',
         component: UsuariosComponent,
+        canActivate: [RoleGuard],
         data: { titulo: 'Mantenimientos Usuario' },
       },
       {

@@ -53,6 +53,7 @@
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{ exact: true }"
                 [routerLink]="[itemSubmenu.url]"
+                *ngIf="itemSubmenu.roleEnable?.includes(usuario.role)"
                 >{{ itemSubmenu.titulo }}</a
               >
             </li>

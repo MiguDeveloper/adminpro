@@ -47,6 +47,10 @@ export class UsuarioService {
     return this.usuario._id || '';
   }
 
+  get getRoleUser() {
+    return this.usuario.role;
+  }
+
   agregarHeaderXtoken() {
     return this.httpHeaders.append('x-token', this.getToken);
   }

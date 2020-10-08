@@ -1,5 +1,8 @@
 import { TablaColeccion } from './../utils/enumeradores';
-import { BusquedaResponse } from '../interfaces/busqueda-response.interface';
+import {
+  BusquedaResponse,
+  BusquedaTodoResp,
+} from '../interfaces/busqueda-response.interface';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -33,6 +36,13 @@ export class BusquedasService {
       {
         headers: this.agregarHeaderXtoken(),
       }
+    );
+  }
+
+  buscarTodo(termino: string): Observable<BusquedaTodoResp> {
+    return this.httpClient.get<BusquedaTodoResp>(
+      `${this.urlBusquedaTodo}/${termino}`,
+      { headers: this.agregarHeaderXtoken() }
     );
   }
 }
